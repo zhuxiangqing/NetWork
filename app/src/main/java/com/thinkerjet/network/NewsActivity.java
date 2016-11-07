@@ -3,8 +3,12 @@ package com.thinkerjet.network;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -16,10 +20,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class NewsActivity extends AppCompatActivity {
+    @BindView(R.id.tb_news)
+    Toolbar tbNews;
+    @BindView(R.id.rv_news)
+    RecyclerView rvNews;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+        ButterKnife.bind(this);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://v.juhe.cn/toutiao/")
                 .addConverterFactory(GsonConverterFactory.create())
