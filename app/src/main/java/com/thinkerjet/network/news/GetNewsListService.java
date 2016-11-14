@@ -1,4 +1,6 @@
-package com.thinkerjet.network;
+package com.thinkerjet.network.news;
+
+import com.thinkerjet.network.news.NewsListData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -10,5 +12,5 @@ import retrofit2.http.Query;
 
 public interface GetNewsListService {
     @GET ("index")
-    Call<NewsListData> getNewsList(@Query("type")String type,@Query("key")String key);
+    Call<NewsListData> getNewsList(@Query("type")String type, @Query("key")String key);
 }

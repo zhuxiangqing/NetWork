@@ -1,11 +1,14 @@
-package com.thinkerjet.network;
+package com.thinkerjet.network.news;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
+
+import com.thinkerjet.network.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +27,8 @@ public class NewsActivity extends AppCompatActivity {
     Toolbar tbNews;
     @BindView(R.id.rv_news)
     RecyclerView rvNews;
+    private NewsAdapter adapter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +45,9 @@ public class NewsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<NewsListData> call, Response<NewsListData> response) {
                 NewsListData newsListData = response.body();
+                adapter = new NewsAdapter(newsListData.getResult().getData());
+                rvNews.setLayoutManager(new LinearLayoutManager(NewsActivity.this));
+                rvNews.setAdapter(adapter);
                 Toast.makeText(NewsActivity.this, newsListData.getResult().getData().size() + "", Toast.LENGTH_SHORT).show();
             }
 
